@@ -1,0 +1,97 @@
+> 
+> 
+> epsilon <- 0.01
+> performanceTable <- rbind(      
++   c(24,350,1,1099),
++   c(24,250,1,689),
++   c(23,250,1,599),
++   c(27,250,4,849),
++   c(24,250,1,499),
++   c(21,200,5,339),
++   c(27,250,4,819),
++   c(21,250,5,389),
++   c(32,250,5,799),
++   c(23,259,5,599)
++ )
+> rownames(performanceTable) <- c(
++   "BenQ ZOWIE",
++   "IIyama G-Master",
++   "LG 24MP59",
++   "Samsung C27",
++   "Samsung S24",
++   "ACER K22HQ",
++   "Philips 278E8QJ",
++   "BenQ GW2270",
++   "AOC Q3279",
++   "LG 24MT49")
+> colnames(performanceTable) <- c(
++   "Matryca",
++   "Iluminacja",
++   "Reakcja",
++   "Cena"
++   )
+> alternativesRanks <- c(1,2,3,4,5,6,7,8,9,10)
+> names(alternativesRanks) <- row.names(performanceTable)
+> criteriaMinMax <- c("max","max","min","min")
+> names(criteriaMinMax) <- colnames(performanceTable)
+> x<-additiveValueFunctionElicitation(performanceTable,  
++                                     criteriaMinMax, epsilon,
++                                     alternativesRanks = alternativesRanks)
+> print(x)
+$`optimum`
+[1] 0.08
+
+$valueFunctions
+$valueFunctions$`Matryca`
+  [,1] [,2] [,3]       [,4]       [,5]
+x   21   23   24 27.0000000 32.0000000
+y    0    0    0  0.2966667  0.2966667
+
+$valueFunctions$Iluminacja
+  [,1] [,2] [,3]   [,4]
+x  200  250  259 350.00
+y    0    0    0   0.04
+
+$valueFunctions$Reakcja
+  [,1] [,2]      [,3]
+x    5 4.00 1.0000000
+y    0 0.02 0.3366667
+
+$valueFunctions$Cena
+  [,1] [,2] [,3] [,4] [,5] [,6] [,7]        [,8]        [,9]
+x 1099  849  819  799  689  599  499 389.0000000 339.0000000
+y    0    0    0    0    0    0    0   0.3066667   0.3266667
+
+
+$overallValues
+     BenQ ZOWIE IIyama G-Master       LG 24MP59 
+        0.37667         0.33667         0.33667 
+    Samsung C27     Samsung S24      ACER K22HQ 
+        0.31667         0.33667         0.32667 
+Philips 278E8QJ     BenQ GW2270       AOC Q3279 
+        0.31667         0.30667         0.29667 
+      LG 24MT49 
+        0.00000 
+
+$ranks
+     BenQ ZOWIE IIyama G-Master       LG 24MP59 
+              1               2               2 
+    Samsung C27     Samsung S24      ACER K22HQ 
+              6               2               5 
+Philips 278E8QJ     BenQ GW2270       AOC Q3279 
+              6               8               9 
+      LG 24MT49 
+             10 
+
+$errors
+     BenQ ZOWIE IIyama G-Master       LG 24MP59 
+           0.00            0.03            0.02 
+    Samsung C27     Samsung S24      ACER K22HQ 
+           0.03            0.00            0.00 
+Philips 278E8QJ     BenQ GW2270       AOC Q3279 
+           0.00            0.00            0.00 
+      LG 24MT49 
+           0.00 
+
+$Kendall
+[1] 0.8613974
